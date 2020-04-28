@@ -7,9 +7,9 @@ const pomodoros = document.querySelector("#pomodoros");
 const workTime = document.querySelector("#time");
 const breakTime = document.querySelector("#break");
 
-let workInterval, breakInterval, tomatoes;
-
-function pageState(){
+let workInterval, breakInterval, tomatoes, minutes;
+let seconds = 0;
+function pageState(){ //Sets the page view
     if (menu.style.visibility == "visible") {
         menu.style.visibility = "hidden";
         clock.style.visibility = "visible"
@@ -20,19 +20,24 @@ function pageState(){
     }
 }
 
+settings.addEventListener('click', pageState); //changes view when settingas is clicked
 
-settings.addEventListener('click', pageState);
-
-function countDown() {
-    counter--;
-    timer.innerHTML = counter;
-}
-
-
-submit.addEventListener('click', () => {
+submit.addEventListener('click', () => { //sets the variables when submit
     workInterval = workTime.value;
     breakInterval = breakTime.value;
     tomatoes = pomodoros.value;
     pageState();
-    
+    setInterval(countDown, 1000);
 })
+
+function countDown(){
+    minutes = workInterval;
+    if (seconds == 0){
+        minutes--;
+        seconds = 59;
+    }
+    seconds--;
+    timer.innerHTML = `${minutes}:${seconds}`;
+}
+
+
