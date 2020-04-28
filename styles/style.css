@@ -25,10 +25,34 @@ img {
 .clock-container {
     display: grid;
     position: absolute;
+    visibility: visible;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    justify-items: center;
+    justify-content: center;
+}
+.button:hover {
+    cursor: pointer;
+}
+
+.declaration {
+    grid-column: span 3;
+    text-align: center;
+    align-self: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+
+.work-timer {
+    grid-column: span 3;
+    text-align: center;
+    align-self: center;
+    font-size: 50px;
 }
 
 
@@ -49,7 +73,7 @@ form > div {
 }
 
 
-form > input {
+form > .submit {
     margin: 40px;
     padding: 10px;
     background-color: #adc5e7;
