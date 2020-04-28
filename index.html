@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/style.css" rel="stylesheet">
+    <script src="scripts/script.js" defer></script>
+    <title>Pomodoro Productivity</title>
+</head>
+<body>
+    <div class="settings-button"><img src="images/settings.png" alt="Settings" id="settings-image"></div>
+    <div class="clock-container">
+        <div class="start-button"><img src="images/play.png" alt="Start" id="start-image"></div>
+        <div class="pause-button"><img src="images/pause.png" alt="Pause" id="pause-image"></div>
+        <div class="restart-button"><img src="images/restart.png" alt="Restart" id="restart-image"></div>
+        <div class="work-timer">25</div>
+        <div class="pomdoro-counter"></div>
+    </div>
+    <div class="menu">
+        <form class="set-parameters">
+        <div class="pomodoro-count">
+            <label for="pomodoros">How Many Pomodoros to complete?</label>
+            <select id="pomodoros">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+        <div class="timer">
+            <label for="time">How many minutes to work?</label></br>
+            <select id="time">
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+                <option value="60">60</option>
+            </select>
+        </div>
+        <div class="breaks">
+            <label for="break">How long for a break?</label></br>
+            <select id="break">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+            </select>
+        </div>
+        <input type="submit" value="Start" class="submit">
+    </form>
+    </div>
+</body>
+</html>

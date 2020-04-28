@@ -1,0 +1,1 @@
+const settings = document.getElementById("settings-image");
