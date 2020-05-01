@@ -15,6 +15,7 @@ const initiate = document.querySelector(".declaration");
 let workInterval, breakInterval, tomatoes, seconds, countdown;
 let isBreak = false;
 let isWork = false;
+let secondsLeft;
 
 //Sets the page view
 function pageState(){ 
@@ -43,11 +44,22 @@ function timer(seconds) {
     displayTimeLeft(seconds);
 
     countdown = setInterval(() => {
-        const secondsLeft = Math.round((then - Date.now()) / 1000);
+        secondsLeft = Math.round((then - Date.now()) / 1000);
 
         if(secondsLeft < 0){
             clearInterval(countdown);
-            return;
+            if(isWork){
+                timer(breakSeconds);
+                isWork = false;
+                isBreak = true;
+                initiate.innerHTML = "Break";
+            }
+            else if(isBreak){
+                timer(workSeconds);
+                isBreak = false;
+                isWork = true;
+                initiate.innerHTML = "Work";
+            }
         }
         displayTimeLeft(secondsLeft);
     }, 1000);
@@ -65,12 +77,20 @@ function startTimer(){
     workInterval = workTime.value;
     breakInterval = breakTime.value;
     tomatoes = pomodoros.value;
-    seconds = workInterval * 60;
-    timer(seconds);
+    workSeconds = workInterval * 60;
+    breakSeconds = breakInterval * 60;
+    isWork = true;
+    timer(workSeconds);
+}
+/* 
+if(isWork && secondsLeft <= 0){
+    isWork = false;
+    isBreak = true;
+    timer(breakSeconds);
+    initiate.innerHTML = "Break!";
 }
 
-
-
+ */
 /* 
 Takes Work Time/Break Time/pomodoros
 
