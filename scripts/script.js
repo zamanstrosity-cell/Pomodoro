@@ -11,6 +11,8 @@ const pomodoros = document.querySelector("#pomodoros");
 const workTime = document.querySelector("#time");
 const breakTime = document.querySelector("#break");
 const initiate = document.querySelector(".declaration");
+const tomatoCounter = document.querySelector(".pomodoro-counter");
+const alarm = document.getElementById("alarm");
 //global variables
 let workInterval, breakInterval, tomatoes, seconds, countdown;
 let isBreak = false;
@@ -31,9 +33,25 @@ function pageState(){
 
 //Event Listeners
 settings.addEventListener('click', pageState); 
-submit.addEventListener('click', startTimer);
-/* play.addEventListener('click', pauseTimer); */
+submit.addEventListener('click', () => {
+    startTimer();
+    pageState();
+});
+play.addEventListener('click', () => {
+    if(!isNaN(workInterval)){
+    timer(secondsLeft);
+    }
 
+});
+pause.addEventListener('click', () => {clearInterval(countdown);});
+restart.addEventListener('click', () => {
+    if(initiate.innerHTML == "BREAK"){
+        timer(breakSeconds);
+    }
+    else if(initiate.innerHTML == "WORK"){
+        timer(workSeconds);
+    }
+});
 
 //Timer function, sets countdown
 function timer(seconds) {
@@ -46,19 +64,21 @@ function timer(seconds) {
     countdown = setInterval(() => {
         secondsLeft = Math.round((then - Date.now()) / 1000);
 
-        if(secondsLeft < 0){
+        if(secondsLeft < 1){
             clearInterval(countdown);
             if(isWork){
                 timer(breakSeconds);
                 isWork = false;
                 isBreak = true;
-                initiate.innerHTML = "Break";
+                alarm.play();
+                initiate.innerHTML = "BREAK";
             }
             else if(isBreak){
                 timer(workSeconds);
                 isBreak = false;
                 isWork = true;
-                initiate.innerHTML = "Work";
+                alarm.play();
+                initiate.innerHTML = "WORK";
             }
         }
         displayTimeLeft(secondsLeft);
@@ -73,37 +93,18 @@ function displayTimeLeft(seconds) {
 }
 
 function startTimer(){
-    pageState();
     workInterval = workTime.value;
     breakInterval = breakTime.value;
     tomatoes = pomodoros.value;
     workSeconds = workInterval * 60;
     breakSeconds = breakInterval * 60;
     isWork = true;
+    initiate.innerHTML = "WORK";
     timer(workSeconds);
 }
+
+
 /* 
-if(isWork && secondsLeft <= 0){
-    isWork = false;
-    isBreak = true;
-    timer(breakSeconds);
-    initiate.innerHTML = "Break!";
-}
-
- */
-/* 
-Takes Work Time/Break Time/pomodoros
-
-Declares the session you're in ("work, break")
-
-Display Work Countdown on screen
-
-When paused...pause the clock
-
-when rewind, restarts the clock it's on 
-
-when play, continues the clock
-
 when work interval done, plays alarm, changes to break time(declaration),
 
 appends a pomodoro to the bottom of the screen

@@ -31,7 +31,7 @@ img {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-rows: repeat(4, 100px);
     justify-items: center;
     justify-content: center;
 }
@@ -53,6 +53,12 @@ img {
     text-align: center;
     align-self: center;
     font-size: 50px;
+}
+
+.pomodoro-counter {
+    grid-column: span 3;
+    text-align: center;
+    align-items: center;
 }
 
 
