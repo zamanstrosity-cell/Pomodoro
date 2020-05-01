@@ -13,11 +13,13 @@ const breakTime = document.querySelector("#break");
 const initiate = document.querySelector(".declaration");
 const tomatoCounter = document.querySelector(".pomodoro-counter");
 const alarm = document.getElementById("alarm");
+
 //global variables
 let workInterval, breakInterval, tomatoes, seconds, countdown;
 let isBreak = false;
 let isWork = false;
 let secondsLeft;
+let counter = 0;
 
 //Sets the page view
 function pageState(){ 
@@ -72,6 +74,9 @@ function timer(seconds) {
                 isBreak = true;
                 alarm.play();
                 initiate.innerHTML = "BREAK";
+                tomatoes--;
+                counter++;
+                tomatoCounter.innerHTML = `${counter} POMODOROS`;
             }
             else if(isBreak){
                 timer(workSeconds);
@@ -80,11 +85,17 @@ function timer(seconds) {
                 alarm.play();
                 initiate.innerHTML = "WORK";
             }
+            if(tomatoes == 0){
+                tomatoCounter.innerHTML = "YOU HAVE ACHIEVED YOUR DESIRED POMODOROS"
+                clearInterval(countdown);
+                return;
+            }
         }
         displayTimeLeft(secondsLeft);
     }, 1000);
 }
 
+//Displays Time left
 function displayTimeLeft(seconds) {
     const minutes = Math.floor(seconds/ 60);
     const remainderSeconds = seconds % 60;
@@ -92,6 +103,8 @@ function displayTimeLeft(seconds) {
     timerDisplay.textContent = display;
 }
 
+
+//sets parameters from settings
 function startTimer(){
     workInterval = workTime.value;
     breakInterval = breakTime.value;
@@ -102,14 +115,3 @@ function startTimer(){
     initiate.innerHTML = "WORK";
     timer(workSeconds);
 }
-
-
-/* 
-when work interval done, plays alarm, changes to break time(declaration),
-
-appends a pomodoro to the bottom of the screen
-
-when break interval done, plays alarm, starts another work interval
-
-when pomodoros done...plays victory lap..
-*/
