@@ -34,9 +34,11 @@ img {
     justify-items: center;
     justify-content: center;
     border: 4px solid rgb(83, 64, 64);
-    padding: 25px;
+    padding: 70px;
     background-color: rgb(236, 74, 74);
-    border-radius: 5px;
+    border-radius: 50%;
+    width: 400px;
+    
 }
 .button:hover {
     cursor: pointer;
